@@ -1,0 +1,22 @@
+{
+  "name": "@genestack/system-entry-point",
+  "version": "1.0.0",
+  "description": "The interface to perform basic calls to Genestack system",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genestack/JS-SDK/packages/system-entry-point"
+  },
+  "keywords": [
+    "Genestack",
+    "interface"
+  ],
+  "author": "Genestack Limited",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
+}
