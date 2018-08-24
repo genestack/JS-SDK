@@ -10,8 +10,8 @@ export const systemCallSymbolSync = Symbol.for('G$system-call-sync');
 
 export interface GenestackSystemMessage {
     type: string;
-    payload?: object;
-    meta?: object;
+    payload?: any;
+    meta?: any;
     error?: boolean;
 }
 
