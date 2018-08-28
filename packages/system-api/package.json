@@ -1,7 +1,7 @@
 {
   "name": "@genestack/system-api",
-  "version": "1.0.0-alpha.0",
-  "description": "Package with Genestack system APIs",
+  "version": "1.0.0",
+  "description": "Genestack system APIs to use in browser",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -r dist && tsc --declaration"
@@ -20,6 +20,6 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "@genestack/interfaces": "^1.0.0-aplha.0"
+    "@genestack/interfaces": "^1.0.0"
   }
 }

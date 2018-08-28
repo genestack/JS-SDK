@@ -1,6 +1,6 @@
 {
   "name": "@genestack/interfaces",
-  "version": "1.0.0-aplha.0",
+  "version": "1.0.0",
   "description": "Interfaces to be used by Genestack system APIs",
   "main": "dist",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "Genestack",
-    "interface"
+    "interfaces"
   ],
   "author": "Genestack Limited",
   "license": "MIT",
