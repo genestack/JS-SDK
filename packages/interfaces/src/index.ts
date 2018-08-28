@@ -5,4 +5,5 @@
  * https://github.com/genestack/JS-SDK/tree/master/LICENSE
  */
 
-export * from './invoke-method'
+export * from './entry-point';
+export * from './method-invocation-message'

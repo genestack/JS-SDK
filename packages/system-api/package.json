@@ -1,10 +1,10 @@
 {
   "name": "@genestack/system-api",
-  "version": "1.0.0",
-  "description": "Package with Genestack system APIs  ",
+  "version": "1.0.0-alpha.0",
+  "description": "Package with Genestack system APIs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc --declaration"
+    "build": "rm -r dist && tsc --declaration"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "@genestack/interfaces": "^1.0.0-aplha.0"
   }
 }
