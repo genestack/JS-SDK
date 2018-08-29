@@ -5,20 +5,17 @@
  * https://github.com/genestack/JS-SDK/tree/master/LICENSE
  */
 
+
+import SystemMessage from './system-message';
+
 export const systemCallSymbol = Symbol.for('G$system-call');
 export const systemCallSymbolSync = Symbol.for('G$system-call-sync');
 
-export interface GenestackSystemMessage {
-    type: string;
-    payload?: any;
-    meta?: any;
-    error?: boolean;
-}
-
 export interface SystemCall {
-    (message: GenestackSystemMessage): Promise<GenestackSystemMessage>;
+    (message: SystemMessage): Promise<SystemMessage>;
 }
 
 export interface SystemCallSync {
-    (message: GenestackSystemMessage): GenestackSystemMessage;
+    (message: SystemMessage): SystemMessage;
 }
+

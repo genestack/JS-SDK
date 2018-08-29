@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "sourceRoot": "./src",
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2015"
+    ]
+  }
+}

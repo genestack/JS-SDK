@@ -3,10 +3,11 @@
     "sourceMap": true,
     "sourceRoot": "./src",
     "outDir": "./dist",
-    "module": "ES2015",
+    "module": "CommonJS",
     "target": "ES5",
     "moduleResolution": "node",
     "lib": [
+      "dom",
       "es2015"
     ]
   }

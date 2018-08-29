@@ -1,0 +1,22 @@
+{
+  "name": "@genestack/interfaces",
+  "version": "1.0.0",
+  "description": "Interfaces to be used by Genestack system APIs",
+  "main": "dist",
+  "scripts": {
+    "build": "rm -r dist && tsc --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genestack/JS-SDK/packages/interfaces"
+  },
+  "keywords": [
+    "Genestack",
+    "interfaces"
+  ],
+  "author": "Genestack Limited",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
+}
