@@ -8,7 +8,7 @@ npm install @genestack/system-api
 ## Content
 ### invokeMethod
  Invoke a Java method from an application's class. Returns a Promise that is resolved with 
- serialized/deserialized value that method returns or rejected wiht the Error object in case
+ serialized/deserialized value that method returns or rejected with the Error object in case
  of any failure.
  
 ```typescript

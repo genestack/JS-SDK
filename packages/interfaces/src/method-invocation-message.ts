@@ -19,7 +19,7 @@ type ApplicationId = string; // should be regex e.g. /w+\/w+/ probably,
  * @property applicationId      Id of application in format "vendor/application"
  * @property method             Application method name
  * @property parameters         A list of parameters that method accepts
- * @property showBusyIndicator  Whether a global busy indicator should be shown
+ * @property showBusyIndicator  If true,  a *global* busy indicator will be shown
  * @property extendSession      If true, this method call will extend current user session
  */
 export interface MethodInvocationPayload {
