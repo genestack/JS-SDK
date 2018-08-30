@@ -19,7 +19,7 @@ interface GenestackServerError {
     calledApplicationId: string;
     method: string;
     parameters: Array<any>;
-    notificationError: string;
+    notificationError: boolean;
     supportEmail: string;
 }
 
