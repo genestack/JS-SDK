@@ -7,10 +7,11 @@
 
 import {
     METHOD_INVOCATION_MESSAGE_TYPE,
+    HANDLE_ERROR_MESSAGE_TYPE,
     MethodInvocationMessage,
     MethodInvocationPayload,
-    ResolutionMessage,
-    InvocationErrorMessage
+    InvocationErrorMessage,
+    HandleErrorMessage
 } from '@genestack/interfaces';
 
 import {systemCall} from './system-calls';
@@ -33,7 +34,9 @@ export function invokeMethod(options: MethodInvocationOptions): Promise<any> {
     };
     return systemCall(message)
         .then(
-            (resolutionMessage: ResolutionMessage) => {
+            (resolutionMessage) => {
+                // TODO here we have to have a ResolutionMessage, not just system message,
+                // TODO it should be declared somehow
                 if (typeof options.handler === 'function') {
                     options.handler(resolutionMessage.payload);
                 }
@@ -41,8 +44,14 @@ export function invokeMethod(options: MethodInvocationOptions): Promise<any> {
             },
             (errorMessage: InvocationErrorMessage | Error) => {
                 const error = ('payload' in errorMessage) ? errorMessage.payload : errorMessage;
-                if (typeof options.handler === 'function') {
+                if (typeof options.errorHandler === 'function') {
                     options.errorHandler(error);
+                } else {
+                    const handleErrorMessage: HandleErrorMessage = {
+                        type: HANDLE_ERROR_MESSAGE_TYPE,
+                        payload: error
+                    };
+                    systemCall(handleErrorMessage);
                 }
                 return error;
             }

@@ -7,3 +7,4 @@
 
 export * from './entry-point';
 export * from './method-invocation-message'
+export * from './handle-error-message'

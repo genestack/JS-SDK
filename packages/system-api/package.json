@@ -4,7 +4,7 @@
   "description": "Genestack system APIs to use in browser",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -r dist && tsc --declaration"
+    "build": "rm -rf dist && tsc --declaration"
   },
   "repository": {
     "type": "git",

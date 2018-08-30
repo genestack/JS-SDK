@@ -7,4 +7,4 @@
 
 import {systemCallSymbol, SystemCall} from '@genestack/interfaces';
 
-export const systemCall: SystemCall = window[systemCallSymbol];
+export const systemCall: SystemCall = (window as any)[systemCallSymbol];
