@@ -4,7 +4,7 @@
   "description": "Interfaces to be used by Genestack system APIs",
   "main": "dist",
   "scripts": {
-    "build": "rm -r dist && tsc --declaration"
+    "build": "rm -rf dist && tsc --declaration"
   },
   "repository": {
     "type": "git",
