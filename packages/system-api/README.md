@@ -6,8 +6,9 @@ npm install @genestack/system-api
 ```
 
 ### loadApplication()
-Returns a Promise that resolves when application loaded all its resources. Promise resolution 
-handler will be called with an object that represents current application.
+Returns a Promise that resolves when all application resources are loaded. Promise resolution 
+handler is called with the object that represents current application.
+
 ```javascript
 import {loadApplication} from '@genestack/system-api';
 
