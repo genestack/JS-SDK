@@ -8,5 +8,5 @@
 export * from './entry-point';
 export * from './method-invocation-message'
 export * from './handle-error-message'
-export * from './application-loded-message'
+export * from './application-loaded-message'
 export * from './application-properties-message'
