@@ -53,7 +53,7 @@ export function invokeMethod(options: MethodInvocationOptions): Promise<any> {
                     };
                     systemCall(handleErrorMessage);
                 }
-                return error;
+                return Promise.reject(error);
             }
         );
 }
