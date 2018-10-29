@@ -26,7 +26,7 @@ export interface ApplicationProperties {
     parameters: Array<any>;
     action: string;
     isApplicationHome: boolean;
-    url: string;
+    pathname: string;
 }
 
 export interface ApplicationPropertiesMessage extends SystemMessage {
