@@ -42,6 +42,9 @@ export function loadApplication() {
                 },
                 get applicationName() {
                     return appProperties.applicationName;
+                },
+                get pathname() {
+                    return appProperties.pathname;
                 }
             };
         });
