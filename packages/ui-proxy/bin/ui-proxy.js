@@ -7,8 +7,7 @@ const {
     DEFAULT_PROXY_PORT,
     DEFAULT_STATIC_PORT,
     DEFAULT_REPLACE_SERVER,
-    DEFAULT_LIVESYNC_PORT,
-    DEFAULT_BUILD_PATH
+    DEFAULT_LIVESYNC_PORT
 } = require('../src/constants');
 const startProxy = require('../src/start-proxy');
 
@@ -26,5 +25,5 @@ startProxy({
     noReload: args.reload === false,
     verbose: Boolean(args.v || args.verboze),
     production: Boolean(args.production),
-    buildPath: path.resolve(process.cwd(), args.buildPath || DEFAULT_BUILD_PATH)
+    buildPath: path.resolve(process.cwd(), args['build-path'])
 });

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2017 Genestack Limited
+ * Copyright (c) 2011-2018 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -23,6 +23,8 @@ module.exports = function createProxy(args) {
         if (updateBundles === null) {
             createStaticServer(args);
             updateBundles = createProxyServer(args);
+        } else {
+            console.log(`${new Date()}: files change detected, reloading...`);
         }
         updateBundles(targetBundles);
         reloadClients();
