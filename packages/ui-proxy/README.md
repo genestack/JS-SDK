@@ -13,7 +13,7 @@ npm install --save-dev ui-proxy
 
 Add to you package.json, to the `scripts` section following key-value pair:
 ```
-"start": "ui-proxy --build-path='./../path-to-local-files'"
+"start": "ui-proxy --build-path='./../path-to-built-local-files'"
 ```
 Then you can run
 ```
