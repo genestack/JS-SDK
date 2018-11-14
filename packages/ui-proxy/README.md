@@ -2,6 +2,7 @@
 This proxy server is used in development process to run local files on top of remote application.
 It maps all `.js` and `.css` resources to their local copies, so you can see updates in your browser
 as soon as you save file (no build and no deploy needed).
+This package does not build your application. You need to run your own script simultaneously, and this one will catch changes in your bundle and rerun the app.
 
 ### Installation
 ```
@@ -13,7 +14,7 @@ npm install --save-dev ui-proxy
 
 Add to you package.json, to the `scripts` section following key-value pair:
 ```
-"start": "ui-proxy --build-path='./../path-to-built-local-files'"
+"start": "ui-proxy --build-path='./../path-to-built~-local-files'"
 ```
 Then you can run
 ```
