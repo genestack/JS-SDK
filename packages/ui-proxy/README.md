@@ -41,7 +41,7 @@ npm start
 > Usually you want to run proxy along with some bundler/transpiler, such as WebPack. You should 
 > run them simultaneously e.g.:
 > ```json
->  "start": "webpack ./src --output ../resources/assets/bundle.js --watch && ui-proxy ../resources/assets"
+>  "start": "webpack ./src --output ../resources/assets/bundle.js --watch & ui-proxy ../resources/assets; fg"
 > ``` 
 
 ## Command parameters
