@@ -13,7 +13,7 @@ const {
 const startProxy = require('../src/start-proxy');
 
 if (!args._[0]) {
-     console.error('Please, specify a path to build files, see readme.md');
+     console.error('Please, specify a path to build files, see README.md');
      process.exit();
  }
 
