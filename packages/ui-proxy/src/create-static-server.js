@@ -1,9 +1,8 @@
 /*
  * Copyright (c) 2011-2018 Genestack Limited
  * All Rights Reserved
- * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
- * The copyright notice above does not evidence any
- * actual or intended publication of such source code.
+ * This source code is distributed under the MIT license:
+ * https://github.com/genestack/JS-SDK/tree/master/LICENSE
  */
 
 const StaticServer = require('static-server');
@@ -18,7 +17,6 @@ module.exports = function createStaticServer(args) {
         if (err) {
             throw new Error(err);
         }
-        console.log(args.buildPath);
         console.log( // eslint-disable-line no-console
             `Static server started at http://localhost:${args.staticPort}`
         );

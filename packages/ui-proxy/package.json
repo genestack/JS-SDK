@@ -1,12 +1,19 @@
 {
-  "name": "ui-proxy",
+  "name": "@genestack/ui-proxy",
   "version": "1.0.0",
   "description": "Proxy server for Genestack frontend development",
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genestack/JS-SDK/tree/master/packages/ui-proxy"
+  },
   "bin": {
     "ui-proxy": "bin/ui-proxy.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Genestack Limited",
+  "license": "MIT",
   "dependencies": {
     "chokidar": "^2.0.4",
     "lodash": "^4.17.4",

@@ -9,12 +9,13 @@ const {
     DEFAULT_REPLACE_SERVER,
     DEFAULT_LIVESYNC_PORT
 } = require('../src/constants');
+
 const startProxy = require('../src/start-proxy');
 
-if (!args.buildPath) {
-    console.error('Argument "buildPath" is required, please see readme.md');
-    process.exit();
-}
+if (!args._[0]) {
+     console.error('Please, specify a path to build files, see readme.md');
+     process.exit();
+ }
 
 startProxy({
     proxyPort: args.port || args.p || DEFAULT_PROXY_PORT,
@@ -25,5 +26,5 @@ startProxy({
     noReload: args.reload === false,
     verbose: Boolean(args.v || args.verboze),
     production: Boolean(args.production),
-    buildPath: path.resolve(process.cwd(), args['build-path'])
+    buildPath: path.resolve(process.cwd(), args._[0])
 });
