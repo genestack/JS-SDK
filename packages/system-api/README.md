@@ -25,6 +25,7 @@ loadApplication().then((app) => {
 | action              | string     | Action app was loaded with (e.g. `openInBrowser`, `openFile`, `createFromSources` etc.) |
 | applicationVersion  | string     | Application version                                                                     |
 | applicationName     | string     | Human readable application name                                                         |
+| pathname            | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
 
 ### invokeMethod()
  Invoke a Java method from an application's class. Returns a Promise that is resolved with 
