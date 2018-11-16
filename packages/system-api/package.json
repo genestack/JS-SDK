@@ -2,7 +2,8 @@
   "name": "@genestack/system-api",
   "version": "1.0.1",
   "description": "Genestack system APIs to use in browser",
-  "main": "dist/index.js",
+  "main": "dist",
+  "typings": "dist",
   "scripts": {
     "build": "rm -rf dist && tsc --declaration"
   },

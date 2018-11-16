@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Interfaces to be used by Genestack system APIs",
   "main": "dist",
+  "typings": "dist",
   "scripts": {
     "build": "rm -rf dist && tsc --declaration"
   },
