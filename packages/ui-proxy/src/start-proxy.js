@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * This source code is distributed under the MIT license:
+ * https://github.com/genestack/JS-SDK/tree/master/LICENSE
+ */
+
+const fs = require('fs');
+const path = require('path');
+const chokidar = require('chokidar');
+const createStaticServer = require('./create-static-server');
+const createProxyServer = require('./create-proxy-server');
+const createReloadServer = require('./create-reload-server');
+
+module.exports = function createProxy(args) {
+    const reloadClients = createReloadServer(args);
+    let updateBundles = null;
+
+    chokidar.watch(args.buildPath).on('change', (event, path) => {
+        const targetBundles = cutFileNames(getAllFiles(args.buildPath), args.buildPath);
+
+        if (updateBundles === null) {
+            createStaticServer(args);
+            updateBundles = createProxyServer(args);
+        } else {
+            console.log(`${new Date()}: files change detected, reloading...`);
+        }
+        updateBundles(targetBundles);
+        reloadClients();
+    });
+}
+
+const getAllFiles = (dir) =>
+    fs.readdirSync(dir).reduce((files, file) => {
+        const name = path.join(dir, file);
+        return fs.statSync(name).isDirectory() ?
+            [...files, ...getAllFiles(name)]
+            : [...files, name];
+    }, []);
+
+const cutFileNames = (files, textToCut) => files.map((file) => file.replace(textToCut, ''));
