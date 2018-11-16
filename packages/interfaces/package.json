@@ -1,6 +1,6 @@
 {
   "name": "@genestack/interfaces",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interfaces to be used by Genestack system APIs",
   "main": "dist",
   "typings": "dist",
