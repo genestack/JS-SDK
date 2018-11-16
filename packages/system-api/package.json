@@ -1,6 +1,6 @@
 {
   "name": "@genestack/system-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Genestack system APIs to use in browser",
   "main": "dist",
   "typings": "dist",
@@ -21,6 +21,6 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "@genestack/interfaces": "^1.0.0"
+    "@genestack/interfaces": "^1.0.1"
   }
 }
