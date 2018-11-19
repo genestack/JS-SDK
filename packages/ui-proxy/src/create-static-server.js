@@ -6,19 +6,21 @@
  */
 
 const StaticServer = require('static-server');
+const portfinder = require('portfinder');
 
 module.exports = function createStaticServer(args) {
-    const server = new StaticServer({
-        rootPath: args.buildPath,
-        port: args.staticPort,
-        followSymlink: true
-    });
-    server.start((err) => {
-        if (err) {
-            throw new Error(err);
-        }
-        console.log( // eslint-disable-line no-console
-            `Static server started at http://localhost:${args.staticPort}`
-        );
-    });
+    return portfinder.getPortPromise()
+        .then((port) => {
+            const server = new StaticServer({
+                rootPath: args.buildPath,
+                port,
+                followSymlink: true
+            });
+            server.start((err) => {
+                if (err) {
+                    throw new Error(err);
+                }
+            });
+            return port;
+        });
 };

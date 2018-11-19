@@ -6,18 +6,25 @@
  */
 
 const WebSocket = require('ws');
+const portfinder = require('portfinder');
 
-module.exports = function createReloadServer({liveSyncPort}) {
-    const ws = new WebSocket.Server({
-        perMessageDeflate: false,
-        port: liveSyncPort
-    });
+module.exports = function createReloadServer() {
+    return portfinder.getPortPromise()
+        .then((port) => {
+            const ws = new WebSocket.Server({
+                perMessageDeflate: false,
+                port
+            });
 
-    return function reloadClients() {
-        ws.clients.forEach((client) => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send('reload');
-            }
+            return {
+                reloadClients: function reloadClients() {
+                    ws.clients.forEach((client) => {
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send('reload');
+                        }
+                    });
+                },
+                liveSyncPort: port
+            };
         });
-    };
 };

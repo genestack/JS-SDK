@@ -95,6 +95,11 @@ function createProxyServer({
         console.log( // eslint-disable-line no-console
             `Check ${proxyAddress}/endpoint/application/run/genestack/signin`
         );
+    }).on('error', (error) => {
+        if (error.code === 'EADDRINUSE') {
+            console.error(`Port ${proxyPort} is in use, retry with another port`);
+            process.exit();
+        }
     });
 
     return function updateBundles(newBundles) {
