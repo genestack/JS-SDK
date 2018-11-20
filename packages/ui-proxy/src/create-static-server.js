@@ -6,10 +6,11 @@
  */
 
 const StaticServer = require('static-server');
-const portfinder = require('portfinder');
+const getDefaultOrAnyFreePort = require('./get-default-or-any-free-port');
+const {DEFAULT_STATIC_PORT} = require('./constants');
 
 module.exports = function createStaticServer(args) {
-    return portfinder.getPortPromise()
+    return getDefaultOrAnyFreePort(DEFAULT_STATIC_PORT)
         .then((port) => {
             const server = new StaticServer({
                 rootPath: args.buildPath,

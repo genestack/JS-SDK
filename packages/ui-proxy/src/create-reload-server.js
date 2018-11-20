@@ -6,10 +6,11 @@
  */
 
 const WebSocket = require('ws');
-const portfinder = require('portfinder');
+const getDefaultOrAnyFreePort = require('./get-default-or-any-free-port');
+const {DEFAULT_LIVESYNC_PORT} = require('./constants');
 
 module.exports = function createReloadServer() {
-    return portfinder.getPortPromise()
+    return getDefaultOrAnyFreePort(DEFAULT_LIVESYNC_PORT)
         .then((port) => {
             const ws = new WebSocket.Server({
                 perMessageDeflate: false,
