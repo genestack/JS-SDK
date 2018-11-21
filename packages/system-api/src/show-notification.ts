@@ -25,7 +25,5 @@ export function showNotification(
         }
     };
 
-    systemCall(systemCallMessage);
-
-    return Promise.resolve()
+    return systemCall(systemCallMessage);
 }
