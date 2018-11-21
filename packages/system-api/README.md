@@ -6,7 +6,7 @@ npm install @genestack/system-api
 ```
 
 ### loadApplication()
-Returns a Promise that resolves when all application resources are loaded. Promise resolution 
+Returns a Promise that resolves when all application resources are loaded. `Promise` resolution
 handler is called with the object that represents current application.
 
 ```javascript
@@ -28,7 +28,7 @@ loadApplication().then((app) => {
 | pathname            | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
 
 ### invokeMethod()
- Invoke a Java method from an application's class. Returns a Promise that is resolved with 
+ Invoke a Java method from an application's class. Returns a `Promise` that is resolved with
  serialized/deserialized value that method returns or rejected with the Error object in case
  of any failure.
  
@@ -54,3 +54,19 @@ loadApplication().then(() => {
 | `extendSession`     |           | boolean          | true    | If true, this method call will extend current  user session  |
 | `handler`           |           | Function         |         | Success handler. Called with method's returned value, the same as the Promise resolution value |
 | `errorHandler`      |           | Function         |         | Error handler. The same as the Promise rejection value|
+
+### showNotification()
+ Shows the system notification notification (at the top of the application page)
+ Returns a `Promise` that is resolved with `undefined`.
+
+```javascript
+import {showNotification} from '@genestack/system-api';
+
+showNotification('Hello, World!', 'success');
+```
+#### Method invocation options
+
+| Parameter          | Required | Type       | default   | Comment                              |
+|--------------------|----------|------------|-----------|--------------------------------------|
+| `message`          | **✓**    | string     |           | Text message                         |
+| `type`             |          | string     | `warning` | One of `success`, `warning`, `error` |
