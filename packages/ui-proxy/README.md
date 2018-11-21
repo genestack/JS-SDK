@@ -54,8 +54,6 @@ npm start -- -s http://localhost:8080
 Other arguments are:
 * `-s` or `--server` for target server, aka backend (default is `https://platform.genestack.org`),
 * `-p` or `--port` for proxy port (default is 3030),
-* `--static-port` for port of static server (default is 3459)
-* `--livesync-port` for port of reload websocket server (default is 29272)
 * `--no-reload` if you want to disable browser auto-reload on each file save
 
 ## Important Notes

@@ -10,6 +10,7 @@ const https = require('https');
 const url = require('url');
 const _ = require('lodash');
 const unzip = require('unzip-response');
+const {COLOR_RED} = require('./constants');
 
 const PROXY_HOST = 'localhost';
 const WAIT_FOR_REPEAT_MAX = 10000;
@@ -95,6 +96,11 @@ function createProxyServer({
         console.log( // eslint-disable-line no-console
             `Check ${proxyAddress}/endpoint/application/run/genestack/signin`
         );
+    }).on('error', (error) => {
+        if (error.code === 'EADDRINUSE') {
+            console.error(COLOR_RED, `Port ${proxyPort} is in use, retry with another port using --server=<port>`);
+            process.exit(1);
+        }
     });
 
     return function updateBundles(newBundles) {

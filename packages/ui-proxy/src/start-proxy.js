@@ -12,19 +12,23 @@ const createStaticServer = require('./create-static-server');
 const createProxyServer = require('./create-proxy-server');
 const createReloadServer = require('./create-reload-server');
 
-module.exports = function createProxy(args) {
-    const reloadClients = createReloadServer(args);
-    let updateBundles = null;
+module.exports = async function createProxy(args) {
+    const {reloadClients, liveSyncPort} = await createReloadServer();
+    const staticPort = await createStaticServer(args);
+    const updateBundles = createProxyServer({...args, staticPort, liveSyncPort});
 
-    chokidar.watch(args.buildPath).on('change', (event, path) => {
-        const targetBundles = cutFileNames(getAllFiles(args.buildPath), args.buildPath);
+    let targetBundles = cutFileNames(getAllFiles(args.buildPath), args.buildPath);
 
-        if (updateBundles === null) {
-            createStaticServer(args);
-            updateBundles = createProxyServer(args);
-        } else {
-            console.log(`${new Date()}: files change detected, reloading...`);
-        }
+    if (targetBundles.length) {
+        updateBundles(targetBundles);
+    }
+
+    chokidar.watch(args.buildPath, {awaitWriteFinish: {
+        stabilityThreshold: 1000,
+        pollInterval: 200
+    }}).on('change', (event, path) => {
+        targetBundles = cutFileNames(getAllFiles(args.buildPath), args.buildPath);
+        console.log(`${new Date()}: files change detected${args.noReload ? '' : ', reloading...'}`);
         updateBundles(targetBundles);
         reloadClients();
     });

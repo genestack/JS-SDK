@@ -6,19 +6,22 @@
  */
 
 const StaticServer = require('static-server');
+const getDefaultOrAnyFreePort = require('./get-default-or-any-free-port');
+const {DEFAULT_STATIC_PORT} = require('./constants');
 
 module.exports = function createStaticServer(args) {
-    const server = new StaticServer({
-        rootPath: args.buildPath,
-        port: args.staticPort,
-        followSymlink: true
-    });
-    server.start((err) => {
-        if (err) {
-            throw new Error(err);
-        }
-        console.log( // eslint-disable-line no-console
-            `Static server started at http://localhost:${args.staticPort}`
-        );
-    });
+    return getDefaultOrAnyFreePort(DEFAULT_STATIC_PORT)
+        .then((port) => {
+            const server = new StaticServer({
+                rootPath: args.buildPath,
+                port,
+                followSymlink: true
+            });
+            server.start((err) => {
+                if (err) {
+                    throw new Error(err);
+                }
+            });
+            return port;
+        });
 };
