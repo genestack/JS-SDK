@@ -57,7 +57,7 @@ loadApplication().then(() => {
 
 ### showNotification()
  Shows the system notification notification (at the top of the application page)
- Returns a `Promise` that is resolved with `undefined`.
+ Returns a `Promise`.
 
 ```javascript
 import {showNotification} from '@genestack/system-api';
