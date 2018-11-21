@@ -7,6 +7,7 @@
 
 const net = require('net');
 const portfinder = require('portfinder');
+const {COLOR_YELLOW} = require('./constants');
 
 const isPortFree = (port) => new Promise((resolve, reject) => {
     const tester = net.createServer()
@@ -21,7 +22,7 @@ const getDefaultOrAnyFreePort = (port = 8000) => new Promise((resolve, reject) =
             if (isFree) {
                 resolve(port);
             } else {
-                console.log('\x1b[33m%s\x1b[0m', 'Another ui-proxy is running, please check it');
+                console.log(COLOR_YELLOW, 'Another ui-proxy is running, please check it');
                 return portfinder.getPortPromise().then(resolve);
             }
         }));
