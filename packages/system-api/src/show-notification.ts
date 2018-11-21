@@ -13,10 +13,10 @@ import {
     SHOW_NOTIFICATION_MESSAGE_TYPE
 } from '@genestack/interfaces';
 
-export function showNotification(
+export async function showNotification(
     message: string,
     type: NotificationType = NotificationType.warning
-): Promise<any> {
+) {
     const systemCallMessage: NotificationMessage = {
         type: SHOW_NOTIFICATION_MESSAGE_TYPE,
         payload: {
@@ -25,5 +25,5 @@ export function showNotification(
         }
     };
 
-    return systemCall(systemCallMessage);
+    await systemCall(systemCallMessage)
 }
