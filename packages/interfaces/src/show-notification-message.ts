@@ -10,9 +10,9 @@ import SystemMessage from './system-message';
 export const SHOW_NOTIFICATION_MESSAGE_TYPE = 'G$:show-notification';
 
 export enum NotificationType {
-    warning,
-    success,
-    error
+    warning = 'warning',
+    success = 'success',
+    error = 'error'
 };
 
 export interface Notification {
