@@ -7,3 +7,4 @@
 
 export * from './invoke-method';
 export * from './application';
+export * from './show-notification';
