@@ -98,7 +98,7 @@ function createProxyServer({
         );
     }).on('error', (error) => {
         if (error.code === 'EADDRINUSE') {
-            console.error(COLOR_RED, `Port ${proxyPort} is in use, retry with another port using --server=<port>`);
+            console.error(COLOR_RED, `Port ${proxyPort} is in use, retry with another port using --port=<port>`);
             process.exit(1);
         }
     });
