@@ -36,7 +36,6 @@ export interface BaseApplicationProperties {
     aboutFile?: string;
     parameters?: Array<any>;
     action?: string;
-    isApplicationHome?: boolean;
     pathname: string;
 }
 

@@ -13,29 +13,33 @@ import {
     ApplicationProperties,
     GetBaseApplicationPropertiesMessage,
     GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
-    BaseApplicationProperties,
     ReadonlyApplicationProperties,
-    ReadonlyBaseApplicationProperties
+    ReadonlyBaseApplicationProperties,
+    BaseApplicationPropertiesMessage
 } from '@genestack/interfaces';
 
 import {systemCall, systemCallSync} from './system-calls';
 
 
 export function loadApplicationProperties(applicationId: string) {
-    const getApplicationPropertiesMessage: GetBaseApplicationPropertiesMessage = {
+    const getBaseApplicationPropertiesMessage: GetBaseApplicationPropertiesMessage = {
         type: GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
         payload: applicationId
     };
-    const appProperties: BaseApplicationProperties = systemCallSync(
-        getApplicationPropertiesMessage
-    ).payload;
 
-    return Promise.resolve<ReadonlyBaseApplicationProperties>({
-        get applicationId() {
-            return appProperties.applicationFullId;
-        },
-        get pathname() {
-            return appProperties.pathname;
+    return systemCall(
+        getBaseApplicationPropertiesMessage
+    ).then<ReadonlyBaseApplicationProperties>((message) => {
+        const {
+            payload: {applicationFullId, pathname}
+        } = message as BaseApplicationPropertiesMessage;
+        return {
+            get applicationId() {
+                return applicationFullId
+            },
+            get pathname() {
+                return pathname;
+            }
         }
     });
 }
