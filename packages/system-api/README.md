@@ -18,14 +18,14 @@ loadApplication().then((app) => {
 ```
 
 #### Application object properties
-| Name                | Type       | Comment                                                                                 |
-|---------------------|------------|-----------------------------------------------------------------------------------------|
-| `applicationId`       | string     | `your-vendor/your-app-id`                                                               |
-| `parameters`          | Array<any> | Array of parameters app was loaded with (usually list of file accessions)               |
-| `action`              | string     | Action app was loaded with (e.g. `openInBrowser`, `openFile`, `createFromSources` etc.) |
-| `applicationVersion`  | string     | Application version                                                                     |
-| `applicationName`     | string     | Human readable application name                                                         |
-| `pathname`            | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
+| Name                 | Type       | Comment                                                                                 |
+|----------------------|------------|-----------------------------------------------------------------------------------------|
+| `applicationId`      | string     | `your-vendor/your-app-id`                                                               |
+| `parameters`         | Array<any> | Array of parameters app was loaded with (usually list of file accessions)               |
+| `action`             | string     | Action app was loaded with (e.g. `openInBrowser`, `openFile`, `createFromSources` etc.) |
+| `applicationVersion` | string     | Application version                                                                     |
+| `applicationName`    | string     | Human readable application name                                                         |
+| `pathname`           | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
 
 ### loadApplicationProperties()
  Returns a `Promise` that resolves with application properties. `Promise` resolution handler is called with the object that represents the properties of the application with the `applicationId` argument.
