@@ -27,6 +27,24 @@ loadApplication().then((app) => {
 | applicationName     | string     | Human readable application name                                                         |
 | pathname            | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
 
+### loadApplicationProperties()
+ Returns a `Promise` that resolves with application properties. `Promise` resolution handler is called with the object that represents the properties of the application with the `applicationId` argument.
+
+```javascript
+loadApplicationProperties(applicationId).then(({pathname, applicationId}) => {
+    console.log(pathname);
+    console.log(applicationId)
+})
+```
+
+`applicationId` is the string identifier of any deployed application.
+
+#### appProperties properties
+| Name                | Type       | Comment                                     |
+|---------------------|------------|---------------------------------------------|
+| `pathname`          | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id` |
+| `applicationId`     | string     | Application identifier |
+
 ### invokeMethod()
  Invoke a Java method from an application's class. Returns a `Promise` that is resolved with
  serialized/deserialized value that method returns or rejected with the Error object in case
