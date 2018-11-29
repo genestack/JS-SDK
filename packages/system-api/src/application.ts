@@ -10,17 +10,57 @@ import {
     IsApplicationLoadedMessage,
     GetApplicationPropertiesMessage,
     GET_APPLICATION_PROPERTIES_MESSAGE_TYPE,
-    ApplicationProperties
+    ApplicationProperties,
+    GetBaseApplicationPropertiesMessage,
+    GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
+    BaseApplicationPropertiesMessage
 } from '@genestack/interfaces';
 
 import {systemCall, systemCallSync} from './system-calls';
+
+
+export interface ReadonlyBaseApplicationProperties {
+    readonly applicationId: string;
+    readonly pathname: string;
+}
+
+export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationProperties {
+    readonly parameters: any[];
+    readonly action: string;
+    readonly applicationName: string;
+    readonly applicationVersion: string;
+}
+
+
+export function loadApplicationProperties(applicationId: string) {
+    const getBaseApplicationPropertiesMessage: GetBaseApplicationPropertiesMessage = {
+        type: GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
+        payload: applicationId
+    };
+
+    return systemCall(
+        getBaseApplicationPropertiesMessage
+    ).then<ReadonlyBaseApplicationProperties>((message) => {
+        const {
+            payload: {applicationFullId, pathname}
+        } = message as BaseApplicationPropertiesMessage;
+        return {
+            get applicationId() {
+                return applicationFullId
+            },
+            get pathname() {
+                return pathname;
+            }
+        }
+    });
+}
 
 export function loadApplication() {
     const loadedMessage: IsApplicationLoadedMessage = {
         type: IS_APPLICATION_LOADED_MESSAGE_TYPE
     };
     return systemCall(loadedMessage)
-        .then(() => {
+        .then<ReadonlyApplicationProperties>(() => {
             const getApplicationPropertiesMessage: GetApplicationPropertiesMessage = {
                 type: GET_APPLICATION_PROPERTIES_MESSAGE_TYPE
             };
