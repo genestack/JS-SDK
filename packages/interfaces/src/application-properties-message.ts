@@ -60,15 +60,3 @@ export interface ApplicationPropertiesMessage extends SystemMessage {
     type: 'G$:application-properties';
     payload: ApplicationProperties
 }
-
-export interface ReadonlyBaseApplicationProperties {
-    readonly applicationId: string;
-    readonly pathname: string;
-}
-
-export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationProperties {
-    readonly parameters: any[];
-    readonly action: string;
-    readonly applicationName: string;
-    readonly applicationVersion: string;
-}

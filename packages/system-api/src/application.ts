@@ -13,12 +13,23 @@ import {
     ApplicationProperties,
     GetBaseApplicationPropertiesMessage,
     GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
-    ReadonlyApplicationProperties,
-    ReadonlyBaseApplicationProperties,
     BaseApplicationPropertiesMessage
 } from '@genestack/interfaces';
 
 import {systemCall, systemCallSync} from './system-calls';
+
+
+export interface ReadonlyBaseApplicationProperties {
+    readonly applicationId: string;
+    readonly pathname: string;
+}
+
+export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationProperties {
+    readonly parameters: any[];
+    readonly action: string;
+    readonly applicationName: string;
+    readonly applicationVersion: string;
+}
 
 
 export function loadApplicationProperties(applicationId: string) {
