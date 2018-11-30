@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.0-alpha.0] – 2018-11-30
+### Added
+- `loadApplicationProperties()` method
+- `ReadonlyApplicationProperties` and `ReadonlyBaseApplicationProperties` interfaces
+
 ## [1.1.0] – 2018-11-22
 ### Added
 - `showNotification()` method
