@@ -6,7 +6,7 @@
  */
 
 // source https://git.io/fAtwX
-export type JSONValue = string | number | boolean | JSONObject | JSONArray;
+export type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
 
 interface JSONObject {
     [x: string]: JSONValue;
