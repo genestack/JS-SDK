@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.0-alpha.1] – 2018-12-06
+### Changed
+- Added missing type `null` to `JSONValue` data type
+
 ## [1.2.0-alpha.0] – 2018-11-30
 ### Added
 - `GetBaseApplicationPropertiesMessage` and `BaseApplicationProperties` interfaces
