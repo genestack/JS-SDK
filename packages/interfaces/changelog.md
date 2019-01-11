@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.2.0-alpha.2] – 2018-12-06
+## [1.2.0-alpha.2] – 2019-01-11
 ### Added
 - ApplicationProperties.resourcePath
 
