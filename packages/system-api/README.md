@@ -26,6 +26,7 @@ loadApplication().then((app) => {
 | `applicationVersion` | string     | Application version                                                                     |
 | `applicationName`    | string     | Human readable application name                                                         |
 | `pathname`           | string     | `pathname` URL part of the application, e.g. `/endpoint/application/run/your-vendor/your-app-id`|
+| `resourcePath`       | string     | URL part, pointing towards root folder of application resources, use it e.g. like `` `${app.resourcePath}relative/path/to/image.png` `` |
 
 ### loadApplicationProperties()
  Returns a `Promise` that resolves with application properties. `Promise` resolution handler is called with the object that represents the properties of the application with the `applicationId` argument.
