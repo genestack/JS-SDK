@@ -49,6 +49,7 @@ export interface ApplicationProperties extends BaseApplicationProperties {
     parameters: Array<any>;
     action: string;
     isApplicationHome: boolean;
+    resourcePath: string;
 }
 
 export interface BaseApplicationPropertiesMessage extends SystemMessage {
