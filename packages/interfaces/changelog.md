@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.0-alpha.2] – 2019-01-11
+### Added
+- `ApplicationProperties.resourcePath`
+
 ## [1.2.0-alpha.1] – 2018-12-06
 ### Changed
 - Values of `JSONValue` data type can now be of type `null`
