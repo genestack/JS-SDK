@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.0-alpha.1] – 2019-01-11
+### Added
+- `app.resourcePath` property in application object returned from `loadApplication()` method
+
 ## [1.2.0-alpha.0] – 2018-11-30
 ### Added
 - `loadApplicationProperties()` method
