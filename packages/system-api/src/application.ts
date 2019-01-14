@@ -29,10 +29,14 @@ export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationPr
     readonly action: string;
     readonly applicationName: string;
     readonly applicationVersion: string;
+    readonly resourcePath: string;
 }
 
 
-export function loadApplicationProperties(applicationId: string) {
+export function loadApplicationProperties(applicationId: string):
+    Promise<ReadonlyBaseApplicationProperties>
+{
+
     const getBaseApplicationPropertiesMessage: GetBaseApplicationPropertiesMessage = {
         type: GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
         payload: applicationId
@@ -40,34 +44,36 @@ export function loadApplicationProperties(applicationId: string) {
 
     return systemCall(
         getBaseApplicationPropertiesMessage
-    ).then<ReadonlyBaseApplicationProperties>((message) => {
+    ).then((message) => {
         const {
             payload: {applicationFullId, pathname}
         } = message as BaseApplicationPropertiesMessage;
-        return {
+        const app: ReadonlyBaseApplicationProperties = {
             get applicationId() {
                 return applicationFullId
             },
             get pathname() {
                 return pathname;
             }
-        }
+        };
+        return app;
     });
 }
 
-export function loadApplication() {
+export function loadApplication(): Promise<ReadonlyApplicationProperties> {
     const loadedMessage: IsApplicationLoadedMessage = {
         type: IS_APPLICATION_LOADED_MESSAGE_TYPE
     };
     return systemCall(loadedMessage)
-        .then<ReadonlyApplicationProperties>(() => {
+        .then(() => {
             const getApplicationPropertiesMessage: GetApplicationPropertiesMessage = {
                 type: GET_APPLICATION_PROPERTIES_MESSAGE_TYPE
             };
             const appProperties: ApplicationProperties = systemCallSync(
                 getApplicationPropertiesMessage
             ).payload;
-            return {
+
+            const app: ReadonlyApplicationProperties = {
                 get applicationId() {
                     return appProperties.applicationFullId;
                 },
@@ -90,5 +96,6 @@ export function loadApplication() {
                     return appProperties.resourcePath;
                 }
             };
+            return app;
         });
 }
