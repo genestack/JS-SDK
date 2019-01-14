@@ -47,14 +47,15 @@ export function loadApplicationProperties(applicationId: string):
         const {
             payload: {applicationFullId, pathname}
         } = message as BaseApplicationPropertiesMessage;
-        return {
+        const baseApplicationProerties : ReadonlyBaseApplicationProperties = {
             get applicationId() {
                 return applicationFullId
             },
             get pathname() {
                 return pathname;
             }
-        }
+        };
+        return baseApplicationProerties;
     });
 }
 
@@ -98,4 +99,3 @@ function getApplicationProperties(): ReadonlyApplicationProperties {
         }
     };
 }
-
