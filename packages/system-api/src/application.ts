@@ -47,7 +47,7 @@ export function loadApplicationProperties(applicationId: string):
         const {
             payload: {applicationFullId, pathname}
         } = message as BaseApplicationPropertiesMessage;
-        const baseApplicationProerties : ReadonlyBaseApplicationProperties = {
+        const baseApplicationProerties: ReadonlyBaseApplicationProperties = {
             get applicationId() {
                 return applicationFullId
             },
