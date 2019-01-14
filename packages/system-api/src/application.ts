@@ -33,23 +33,9 @@ export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationPr
 }
 
 
-function getOtherApplicationProperties(message: BaseApplicationPropertiesMessage):
-    ReadonlyBaseApplicationProperties
-{
-    return {
-        get applicationId() {
-            return message.payload.applicationFullId
-        },
-        get pathname() {
-            return message.payload.pathname;
-        }
-    }
-}
-
 export function loadApplicationProperties(applicationId: string):
     Promise<ReadonlyBaseApplicationProperties>
 {
-
     const getBaseApplicationPropertiesMessage: GetBaseApplicationPropertiesMessage = {
         type: GET_BASE_APPLICATION_PROPERTIES_MESSAGE_TYPE,
         payload: applicationId
@@ -57,9 +43,27 @@ export function loadApplicationProperties(applicationId: string):
 
     return systemCall(
         getBaseApplicationPropertiesMessage
-    ).then((message) => getOtherApplicationProperties(
-        message as BaseApplicationPropertiesMessage
-    ));
+    ).then((message) => {
+        const {
+            payload: {applicationFullId, pathname}
+        } = message as BaseApplicationPropertiesMessage;
+        return {
+            get applicationId() {
+                return applicationFullId
+            },
+            get pathname() {
+                return pathname;
+            }
+        }
+    });
+}
+
+
+export function loadApplication(): Promise<ReadonlyApplicationProperties> {
+    const loadedMessage: IsApplicationLoadedMessage = {
+        type: IS_APPLICATION_LOADED_MESSAGE_TYPE
+    };
+    return systemCall(loadedMessage).then(getApplicationProperties);
 }
 
 function getApplicationProperties(): ReadonlyApplicationProperties {
@@ -95,9 +99,3 @@ function getApplicationProperties(): ReadonlyApplicationProperties {
     };
 }
 
-export function loadApplication(): Promise<ReadonlyApplicationProperties> {
-    const loadedMessage: IsApplicationLoadedMessage = {
-        type: IS_APPLICATION_LOADED_MESSAGE_TYPE
-    };
-    return systemCall(loadedMessage).then(getApplicationProperties);
-}
