@@ -33,6 +33,19 @@ export interface ReadonlyApplicationProperties extends ReadonlyBaseApplicationPr
 }
 
 
+function getOtherApplicationProperties(message: BaseApplicationPropertiesMessage):
+    ReadonlyBaseApplicationProperties
+{
+    return {
+        get applicationId() {
+            return message.payload.applicationFullId
+        },
+        get pathname() {
+            return message.payload.pathname;
+        }
+    }
+}
+
 export function loadApplicationProperties(applicationId: string):
     Promise<ReadonlyBaseApplicationProperties>
 {
@@ -44,58 +57,47 @@ export function loadApplicationProperties(applicationId: string):
 
     return systemCall(
         getBaseApplicationPropertiesMessage
-    ).then((message) => {
-        const {
-            payload: {applicationFullId, pathname}
-        } = message as BaseApplicationPropertiesMessage;
-        const app: ReadonlyBaseApplicationProperties = {
-            get applicationId() {
-                return applicationFullId
-            },
-            get pathname() {
-                return pathname;
-            }
-        };
-        return app;
-    });
+    ).then((message) => getOtherApplicationProperties(
+        message as BaseApplicationPropertiesMessage
+    ));
+}
+
+function getApplicationProperties(): ReadonlyApplicationProperties {
+    const getApplicationPropertiesMessage: GetApplicationPropertiesMessage = {
+        type: GET_APPLICATION_PROPERTIES_MESSAGE_TYPE
+    };
+    const appProperties: ApplicationProperties = systemCallSync(
+        getApplicationPropertiesMessage
+    ).payload;
+
+    return {
+        get applicationId() {
+            return appProperties.applicationFullId;
+        },
+        get parameters() {
+            return appProperties.parameters;
+        },
+        get action() {
+            return appProperties.action;
+        },
+        get applicationVersion() {
+            return appProperties.applicationVersion;
+        },
+        get applicationName() {
+            return appProperties.applicationName;
+        },
+        get pathname() {
+            return appProperties.pathname;
+        },
+        get resourcePath() {
+            return appProperties.resourcePath;
+        }
+    };
 }
 
 export function loadApplication(): Promise<ReadonlyApplicationProperties> {
     const loadedMessage: IsApplicationLoadedMessage = {
         type: IS_APPLICATION_LOADED_MESSAGE_TYPE
     };
-    return systemCall(loadedMessage)
-        .then(() => {
-            const getApplicationPropertiesMessage: GetApplicationPropertiesMessage = {
-                type: GET_APPLICATION_PROPERTIES_MESSAGE_TYPE
-            };
-            const appProperties: ApplicationProperties = systemCallSync(
-                getApplicationPropertiesMessage
-            ).payload;
-
-            const app: ReadonlyApplicationProperties = {
-                get applicationId() {
-                    return appProperties.applicationFullId;
-                },
-                get parameters() {
-                    return appProperties.parameters;
-                },
-                get action() {
-                    return appProperties.action;
-                },
-                get applicationVersion() {
-                    return appProperties.applicationVersion;
-                },
-                get applicationName() {
-                    return appProperties.applicationName;
-                },
-                get pathname() {
-                    return appProperties.pathname;
-                },
-                get resourcePath() {
-                    return appProperties.resourcePath;
-                }
-            };
-            return app;
-        });
+    return systemCall(loadedMessage).then(getApplicationProperties);
 }
