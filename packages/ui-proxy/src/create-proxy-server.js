@@ -113,9 +113,6 @@ function createProxyServer({
 function getOutgoingRequestParams(urlParams, clientReq) {
     const defaultPort = urlParams.protocol === 'https:' ? 443 : 80;
     let path = clientReq.url;
-    if (/localhost/.test(urlParams.hostname) && path.indexOf('/frontend') !== 0) {
-        path = `/frontend${path}`;
-    }
     return {
         method: clientReq.method,
         protocol: urlParams.protocol,
@@ -222,7 +219,6 @@ function getHostReplacer(requestServerParams, proxyPort) {
 
         return str
             .replace(urlReplacement, proxyAddress)
-            .replace(/frontend\//, '')
             .replace(requestServerParams.hostname, PROXY_HOST);
     };
 }
