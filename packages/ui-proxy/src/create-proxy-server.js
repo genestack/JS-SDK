@@ -183,7 +183,7 @@ function preprocessResponse(...preprocessors) {
 }
 
 function replaceURLsInHTML(replacementHost, proxyAddress) {
-    const urlSearch = new RegExp(`['"]{1}((http(s?):\/\/.*${replacementHost}).+)['"]+`, 'gim');
+    const urlSearch = new RegExp(`['"]{1}((http(s?):\/\/.*${replacementHost}).+)['"]+`, 'gi');
     replacedUrls = {};
 
     return function(responseText) {
