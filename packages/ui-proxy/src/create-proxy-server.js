@@ -63,7 +63,7 @@ function createProxyServer({
                     );
                     if (isHtml) {
                         preprocessResponse(
-                            replaceUrls(requestServerParams.host, getProxyAddress(proxyPort)),
+                            replaceURLsInHTML(requestServerParams.host, getProxyAddress(proxyPort)),
                             noReload ? _.identity : injectReloadScript(reloadScript)
                         )(
                             originalResponse,
@@ -182,9 +182,10 @@ function preprocessResponse(...preprocessors) {
     };
 }
 
-function replaceUrls(replacementHost, proxyAddress) {
-    const urlSearch = new RegExp(`((http.*${replacementHost}).+)['"]+`, 'g');
+function replaceURLsInHTML(replacementHost, proxyAddress) {
+    const urlSearch = new RegExp(`['"]{1}((http(s?):\/\/.*${replacementHost}).+)['"]+`, 'gim');
     replacedUrls = {};
+
     return function(responseText) {
         return responseText.replace(urlSearch, (match, oldUrl, replacement) => {
             replacedUrls[oldUrl.replace(replacement, proxyAddress)] = oldUrl;
