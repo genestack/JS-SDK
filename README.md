@@ -1,8 +1,8 @@
 # JS-SDK
 This mono-repository contains components of an old Genestack JavaScript 
-software development kit. These components are deprecated and support for
-these components will be removed in the future versions of Genestack
-platform.
+software development kit. These components are deprecated and do not receive
+security patches. Support for these components will be removed in the future
+versions of Genestack platform.
 
 3rd party developers that might use this SDK should switch to using ODM
 REST APIs instead.
