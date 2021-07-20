@@ -1,6 +1,12 @@
 
 # Changelog
 
+## [1.0.4] - 2021-07-20
+
+### Fixed
+
+-   Remove content length from headers for html stream
+
 ## [1.0.3] - 2021-02-02
 
 ### Fixed
