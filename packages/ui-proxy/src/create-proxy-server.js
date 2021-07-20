@@ -148,7 +148,10 @@ function getStaticRedirectParameters(staticPort, requestedUrl) {
 
 function getResponseHeaders(originalHeaders, replaceHost, isUnzipped) {
     return _.reduce(originalHeaders, (newHeaders, value, headerName) => {
-        if (isUnzipped && headerName === 'content-encoding') {
+        // skip unzipped stream with special header name probably because
+        // content-encoding influences that the browser to decode data incorrectly (net::ERR_CONTENT_DECODING_FAILED)
+        // content-length influences that HTML will be partial loaded
+        if (isUnzipped && ['content-encoding', 'content-length'].includes(headerName)) {
             return newHeaders;
         }
         if (Array.isArray(value)) {
