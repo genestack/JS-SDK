@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/genestack/JS-SDK/tree/master/packages/ui-proxy"
   },
+  "publishConfig": {
+    "registry": "https://nexus.devops.gs.team/repository/npm-releases"
+  },
   "bin": {
     "ui-proxy": "bin/ui-proxy.js"
   },
