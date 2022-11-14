@@ -1,0 +1,7 @@
+services:
+  ui-proxy:
+    build:
+      context: ../packages/ui-proxy
+      args:
+        - DOCKER_REGISTRY_GROUP
+    image: ${DOCKER_REGISTRY_SNAPSHOTS}/genestack-ui-proxy:${IMAGE_TAG}
