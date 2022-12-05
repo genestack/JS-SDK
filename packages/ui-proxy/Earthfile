@@ -1,0 +1,26 @@
+VERSION 0.6
+
+ARG --required DOCKER_REGISTRY_GROUP
+
+deps:
+    FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
+
+    COPY package.json package-lock.json ./
+    RUN npm install
+
+    SAVE IMAGE --cache-hint
+
+test:
+    FROM +deps
+
+    COPY . .
+    #RUN npm test
+
+    SAVE IMAGE --cache-hint
+
+publish:
+    FROM +test
+
+    RUN npm publish
+
+    SAVE IMAGE --cache-hint
