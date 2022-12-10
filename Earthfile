@@ -4,9 +4,8 @@ IMPORT ./packages/ui-proxy AS ui-proxy
 
 ARG --required DOCKER_REGISTRY_GROUP
 
-test-all:
+test:
   BUILD ui-proxy+test --DOCKER_REGISTRY_GROUP=${DOCKER_REGISTRY_GROUP}
 
-
-publish-all:
+publish:
   BUILD ui-proxy+publish --DOCKER_REGISTRY_GROUP=${DOCKER_REGISTRY_GROUP}
