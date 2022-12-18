@@ -30,6 +30,4 @@ test:
 publish:
     FROM +test
 
-    RUN npm publish
-
-    SAVE IMAGE --cache-hint
+    RUN --push npm publish
