@@ -10,12 +10,11 @@ deps:
     FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
 
     ENV NEXUS_USER=${NEXUS_USER}
-    ENV NEXUS_PASSWORD=${NEXUS_PASSWORD}
     ENV NPM_REGISTRY_GROUP=${NPM_REGISTRY_GROUP}
     ENV NEXUS_REPOSITORY_URL=${NEXUS_REPOSITORY_URL}
 
     COPY package.json package-lock.json ./
-    RUN npm-login.sh && npm install
+    RUN --secret NEXUS_PASSWORD npm-login.sh && npm install
 
     SAVE IMAGE --cache-hint
 
