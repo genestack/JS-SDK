@@ -2,31 +2,36 @@ VERSION 0.6
 
 ARG --required DOCKER_REGISTRY_GROUP
 ARG --required NEXUS_USER
-ARG --required NEXUS_PASSWORD
 ARG --required NPM_REGISTRY_GROUP
+ARG --required NPM_REGISTRY_RELEASES
+ARG --required NPM_REGISTRY_SNAPSHOTS
 ARG --required NEXUS_REPOSITORY_URL
 
 deps:
-    FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
-
-    ENV NEXUS_USER=${NEXUS_USER}
-    ENV NPM_REGISTRY_GROUP=${NPM_REGISTRY_GROUP}
-    ENV NEXUS_REPOSITORY_URL=${NEXUS_REPOSITORY_URL}
+    ARG --required BASE_IMAGES_VERSION
+    FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:${BASE_IMAGES_VERSION}
 
     COPY package.json package-lock.json ./
-    RUN --secret NEXUS_PASSWORD npm-login.sh && npm install
+    RUN --secret NEXUS_PASSWORD \
+            npm-login.sh && \
+            npm install
 
     SAVE IMAGE --cache-hint
 
-test:
+build:
     FROM +deps
 
     COPY . .
-    #RUN npm test
+    # Nothing to build and test
+    #RUN \
+    #    npm run test
 
     SAVE IMAGE --cache-hint
 
-publish:
-    FROM +test
+main:
+    FROM +build
 
-    RUN --push npm publish
+    RUN --push \
+        --secret NEXUS_PASSWORD \
+            npm-login.sh && \
+            npm publish
