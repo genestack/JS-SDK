@@ -12,8 +12,7 @@ deps:
     ARG --required BASE_IMAGES_VERSION
     FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:${BASE_IMAGES_VERSION}
 
-    COPY packages/ui-proxy/ \
-         packages/ui-proxy/package.json \
+    COPY packages/ui-proxy/package.json \
          packages/ui-proxy/package-lock.json ./
 
     RUN --secret NEXUS_PASSWORD \
