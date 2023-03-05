@@ -1,16 +1,15 @@
-VERSION 0.6
+VERSION 0.7
 
 IMPORT ./packages/ui-proxy
 
-ARG --required DOCKER_REGISTRY_GROUP
-ARG --required NEXUS_USER
-ARG --required NPM_REGISTRY_GROUP
-ARG --required NPM_REGISTRY_RELEASES
-ARG --required NPM_REGISTRY_SNAPSHOTS
-ARG --required NEXUS_REPOSITORY_URL
-ARG --required BASE_IMAGES_VERSION
+ARG --global --required DOCKER_REGISTRY_GROUP
+ARG --global --required NPM_REGISTRY_GROUP
+ARG --global --required NPM_REGISTRY_RELEASES
+ARG --global --required NPM_REGISTRY_SNAPSHOTS
+ARG --global --required NEXUS_REPOSITORY_URL
 
 main:
+    ARG --required BASE_IMAGES_VERSION
     BUILD ui-proxy+main \
         --DOCKER_REGISTRY_GROUP=${DOCKER_REGISTRY_GROUP} \
         --NEXUS_USER=${NEXUS_USER} \

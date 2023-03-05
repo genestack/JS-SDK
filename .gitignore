@@ -65,3 +65,9 @@ dist
 .DS_Store
 
 .idea/
+
+# Earthly stuff
+.env
+.env-woq
+.arg
+.secret

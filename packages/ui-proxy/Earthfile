@@ -1,18 +1,19 @@
-VERSION 0.6
+VERSION 0.7
 
-ARG --required DOCKER_REGISTRY_GROUP
-ARG --required NEXUS_USER
-ARG --required NPM_REGISTRY_GROUP
-ARG --required NPM_REGISTRY_RELEASES
-ARG --required NPM_REGISTRY_SNAPSHOTS
-ARG --required NEXUS_REPOSITORY_URL
+ARG --global --required DOCKER_REGISTRY_GROUP
+ARG --global --required NPM_REGISTRY_GROUP
+ARG --global --required NPM_REGISTRY_RELEASES
+ARG --global --required NPM_REGISTRY_SNAPSHOTS
+ARG --global --required NEXUS_REPOSITORY_URL
 
 deps:
     ARG --required BASE_IMAGES_VERSION
     FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:${BASE_IMAGES_VERSION}
 
     COPY package.json package-lock.json ./
-    RUN --secret NEXUS_PASSWORD \
+    RUN \
+        --secret NEXUS_USER \
+        --secret NEXUS_PASSWORD \
             npm-login.sh && \
             npm install
 
@@ -32,6 +33,7 @@ main:
     FROM +build
 
     RUN --push \
+        --secret NEXUS_USER \
         --secret NEXUS_PASSWORD \
             npm-login.sh && \
             npm publish
